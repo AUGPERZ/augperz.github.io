@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biblioteca gratis · Finanzas para sueldos reales</title>
+<meta name="description" content="Las plantillas de finanzas de @augperz, gratis y en un solo lugar. Cuentas claras, en pesos, para sueldos reales.">
+<meta property="og:title" content="Tus plantillas de finanzas, gratis y en un solo lugar">
+<meta property="og:description" content="Plantilla 50/30/20, Reto 52 semanas y más. Cuentas claras, en pesos, para sueldos reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E1511;
+    --card: #18221C;
+    --card-2: #1E2A23;
+    --line: #2E3D33;
+    --gold: #C9A34E;
+    --gold-2: #E2BF6E;
+    --cream: #F4EFE3;
+    --muted: #9AA39C;
+    --soft: #C9CFC9;
+    --green: #2FBF7A;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--cream);
+    font-family: Montserrat, Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .serif { font-family: "Playfair Display", Georgia, serif; font-style: italic; color: var(--gold); font-weight: 700; }
+
+  /* Barra superior */
+  header {
+    position: sticky; top: 10px; z-index: 10;
+    margin: 10px auto 0; max-width: 1040px; padding: 0 16px;
+  }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: rgba(24, 34, 28, .86); backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 8px 8px 20px;
+  }
+  .logo { font-weight: 800; letter-spacing: .5px; font-size: 15px; text-decoration: none; white-space: nowrap; }
+  .logo span { color: var(--gold); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: linear-gradient(180deg, var(--gold-2), var(--gold));
+    color: #0E1511; font-weight: 800; font-size: 15px; text-decoration: none;
+    border: 0; border-radius: 12px; padding: 15px 26px; cursor: pointer;
+    box-shadow: 0 10px 30px rgba(201, 163, 78, .25);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(201, 163, 78, .35); }
+  .btn.small { padding: 10px 18px; font-size: 14px; border-radius: 999px; box-shadow: none; white-space: nowrap; }
+  .btn.ghost { background: transparent; color: var(--cream); border: 1px solid var(--line); box-shadow: none; }
+
+  /* Portada */
+  .hero { padding: 56px 0 40px; }
+  .hero-card {
+    background: radial-gradient(120% 80% at 0% 0%, rgba(201,163,78,.12), transparent 55%), var(--card);
+    border: 1px solid var(--line); border-radius: 24px; padding: 40px 28px;
+  }
+  .chip {
+    display: inline-block; border: 1px solid var(--line); background: var(--card-2);
+    border-radius: 16px; padding: 7px 14px; font-size: 13px; line-height: 1.45; color: var(--soft);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; margin-right: 8px; vertical-align: 1px; }
+  h1 { font-size: clamp(34px, 7vw, 60px); line-height: 1.08; margin: 22px 0 18px; font-weight: 800; letter-spacing: -.5px; }
+  h1 .dim { color: var(--muted); }
+  .lead { font-size: 18px; color: var(--soft); max-width: 620px; margin: 0 0 28px; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 34px; max-width: 560px; }
+  .stat b { display: block; font-size: 30px; font-weight: 800; }
+  .stat span { display: block; font-size: 13px; line-height: 1.35; color: var(--muted); margin-top: 4px; }
+
+  /* Secciones */
+  section { padding: 44px 0; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; margin: 0 0 10px; }
+  h2 { font-size: clamp(26px, 4.5vw, 38px); line-height: 1.15; margin: 0 0 12px; font-weight: 800; }
+  .sub { color: var(--soft); margin: 0 0 28px; max-width: 640px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .item {
+    position: relative; background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 24px; display: flex; flex-direction: column; min-height: 250px;
+  }
+  .item .num { font-size: 48px; font-weight: 800; color: #26332B; line-height: 1; margin-bottom: 18px; }
+  .item .tag { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .item h3 { font-size: 20px; margin: 6px 0 8px; }
+  .item p { color: var(--soft); font-size: 15px; margin: 0 0 18px; flex: 1; }
+  .lock {
+    position: absolute; top: 18px; right: 18px; font-size: 12px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: var(--card-2);
+  }
+  .item .open { display: none; }
+  .unlocked .item .open { display: inline-flex; }
+  .unlocked .item .lock.free { color: var(--green); border-color: rgba(47,191,122,.4); }
+  .item.soon { border-style: dashed; background: transparent; }
+  .item.soon .num { color: #1F2A23; }
+
+  /* Sobre mí */
+  .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: center; }
+  .checks { list-style: none; padding: 0; margin: 18px 0 0; }
+  .checks li { padding-left: 28px; position: relative; margin: 10px 0; color: var(--soft); }
+  .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 800; }
+  .quote {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px;
+    font-size: 18px; color: var(--cream);
+  }
+  .quote small { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; }
+
+  /* Pro */
+  .pro {
+    background: radial-gradient(90% 70% at 100% 0%, rgba(201,163,78,.10), transparent 60%), var(--card);
+    border: 1px solid var(--line); border-radius: 24px; padding: 32px 24px;
+  }
+  .pro .grid { margin-top: 8px; }
+  .pro .item { background: var(--card-2); min-height: 0; }
+  .pro .item ul { margin: 0 0 16px; padding-left: 18px; color: var(--soft); font-size: 14px; }
+  .pro .item ul li { margin: 4px 0; }
+  .soon-btn { margin-top: auto; text-align: center; color: var(--muted); border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-weight: 600; font-size: 14px; }
+
+  /* Formulario */
+  .form-card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 32px 24px; max-width: 620px; margin: 0 auto; }
+  label.field { display: block; font-size: 13px; color: var(--muted); margin: 14px 0 6px; }
+  input[type=text], input[type=email] {
+    width: 100%; background: var(--bg); color: var(--cream); font: inherit; font-size: 16px;
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; outline: none;
+  }
+  input[type=text]:focus, input[type=email]:focus { border-color: var(--gold); }
+  .check { display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 4px; color: var(--soft); font-size: 14px; cursor: pointer; }
+  .check input { margin-top: 3px; accent-color: var(--gold); width: 18px; height: 18px; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-card .btn { width: 100%; margin-top: 18px; }
+  .ticks { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+  .ticks span::before { content: "✓ "; color: var(--gold); font-weight: 800; }
+  .msg { margin-top: 14px; font-size: 14px; }
+  .msg.err { color: #E58A7A; }
+  .done { display: none; text-align: center; }
+  .done h3 { font-size: 24px; margin: 6px 0 8px; }
+  .done p { color: var(--soft); margin: 0 0 18px; }
+  .unlocked .form-fields { display: none; }
+  .unlocked .done { display: block; }
+
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 28px 0 40px; color: var(--muted); font-size: 13px; }
+  footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 720px) {
+    .hero { padding-top: 28px; }
+    .hero-card { padding: 30px 20px; }
+    .lead { font-size: 16px; }
+    .about { grid-template-columns: 1fr; }
+    .stat b { font-size: 24px; }
+    .bar { padding-left: 16px; }
+    .logo { font-size: 13px; }
+    .bar .btn.small { padding: 9px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#">SUELDOS <span>REALES</span></a>
+    <a class="btn small" href="#desbloquear">Desbloquear gratis</a>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+
+  <div class="hero">
+    <div class="hero-card">
+      <div class="chip"><span class="dot"></span>@augperz · ¿Comentaste PLAN o RETO? Aquí está todo</div>
+      <h1>Tus plantillas de finanzas, <span class="serif">gratis</span><br><span class="dim">y en un solo lugar.</span></h1>
+      <p class="lead">Cada herramienta de mis videos, lista para copiar en tu Google Sheets. Cuentas claras, en pesos, para sueldos reales como el tuyo.</p>
+      <a class="btn" href="#desbloquear">Desbloquear mis plantillas →</a>
+      <div class="note">Gratis. Sin spam. Solo te pido tu correo.</div>
+      <div class="stats">
+        <div class="stat"><b>2</b><span>plantillas gratis (y vienen más)</span></div>
+        <div class="stat"><b>$0</b><span>te cuestan</span></div>
+        <div class="stat"><b>1 min</b><span>para empezar a usarlas</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="biblioteca">
+    <p class="eyebrow">La biblioteca</p>
+    <h2>Lo que te llevas <span class="serif">hoy</span></h2>
+    <p class="sub">Dejas tu correo y se abren todas. También te las mando al correo para que no se te pierdan.</p>
+    <div class="grid">
+      <article class="item">
+        <span class="lock free" data-free>🔒 Con tu correo</span>
+        <div class="num">01</div>
+        <span class="tag">Plantilla · Google Sheets</span>
+        <h3>Regla 50/30/20</h3>
+        <p>Escribe tu sueldo en la casilla dorada y ve al instante cuánto va a necesidades, a gustos y a ahorro.</p>
+        <a class="btn ghost open" href="https://docs.google.com/spreadsheets/d/1bGeNwZIL2ghI2j8y575YQFZdTI8QL4wjIIvazzZe8JU/copy" target="_blank" rel="noopener">Hacer mi copia →</a>
+      </article>
+      <article class="item">
+        <span class="lock free" data-free>🔒 Con tu correo</span>
+        <div class="num">02</div>
+        <span class="tag">Calendario · Google Sheets</span>
+        <h3>Reto 52 semanas</h3>
+        <p>Guarda un poquito más cada semana y llega a $1.378.000 en un año. Marcas "Sí" y la hoja lleva la cuenta.</p>
+        <a class="btn ghost open" href="https://docs.google.com/spreadsheets/d/10mnIcQR5j89rnuI6Q8UUzYME2KVb3T3TrPpdTyt1o3M/copy" target="_blank" rel="noopener">Hacer mi copia →</a>
+      </article>
+      <article class="item soon">
+        <span class="lock">Muy pronto</span>
+        <div class="num">03</div>
+        <span class="tag">Nueva herramienta</span>
+        <h3>La próxima, gratis también</h3>
+        <p>Cada vez que un video resuelve un problema de plata, su herramienta llega aquí. Si dejas tu correo, te aviso cuando salga.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="about">
+      <div>
+        <p class="eyebrow">Quién está detrás</p>
+        <h2>Hola, aquí <span class="serif">@augperz</span></h2>
+        <p class="sub" style="margin-bottom:0">Hago videos cortos de finanzas para gente joven que gana poco y quiere que la plata le alcance. Sin fórmulas raras ni promesas de hacerte rico: solo cuentas claras, en pesos. Estas plantillas son el complemento de esos videos.</p>
+        <ul class="checks">
+          <li>Videos nuevos cada semana en Instagram</li>
+          <li>Cada plantilla la armo y la pruebo antes de compartirla</li>
+          <li>Pensado para sueldos reales, no para expertos en Excel</li>
+        </ul>
+      </div>
+      <div class="quote">
+        "No necesitas ganar más para empezar. Necesitas saber a dónde se va lo que ya ganas."
+        <small>La idea detrás de cada herramienta</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pro">
+      <p class="eyebrow">Próximamente</p>
+      <h2>Herramientas <span class="serif">Pro</span></h2>
+      <p class="sub">Para cuando quieras ir más allá. Las estoy terminando; si dejas tu correo y marcas la casilla, te aviso primero.</p>
+      <div class="grid">
+        <article class="item">
+          <span class="lock">🔒 Pro</span>
+          <span class="tag">Plantilla Pro 01</span>
+          <h3>Sal de deudas con un plan</h3>
+          <p>Escribe tus tarjetas y créditos, y la hoja te dice en qué orden pagar y en qué mes quedas en cero.</p>
+          <ul>
+            <li>Método bola de nieve o avalancha</li>
+            <li>Cuánto te ahorras en intereses</li>
+            <li>Plan mes a mes, deuda por deuda</li>
+          </ul>
+          <div class="soon-btn">Muy pronto</div>
+        </article>
+        <article class="item">
+          <span class="lock">🔒 Pro</span>
+          <span class="tag">Pack completo</span>
+          <h3>Pack Sueldos Reales</h3>
+          <p>Todo para ordenar tu plata de una vez, en un solo paquete.</p>
+          <ul>
+            <li>Presupuesto mensual</li>
+            <li>Reto fondo de emergencia</li>
+            <li>Guía PDF paso a paso</li>
+            <li>Videos explicando cada herramienta</li>
+          </ul>
+          <div class="soon-btn">Muy pronto</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="desbloquear">
+    <div class="form-card">
+      <form class="form-fields" id="form" novalidate>
+        <p class="eyebrow">Desbloquear gratis</p>
+        <h2 style="font-size:28px">Recibe tus plantillas</h2>
+        <label class="field" for="nombre">Tu nombre</label>
+        <input type="text" id="nombre" name="nombre" autocomplete="given-name" placeholder="¿Cómo te llamas?" maxlength="60">
+        <label class="field" for="email">Tu correo</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="tucorreo@gmail.com" required maxlength="120">
+        <div class="trap" aria-hidden="true"><input type="text" name="web" tabindex="-1" autocomplete="off"></div>
+        <label class="check"><input type="checkbox" id="avisos" checked> Sí, avísame cuando salgan plantillas nuevas y las herramientas Pro.</label>
+        <button class="btn" type="submit" id="enviar">Desbloquear mis plantillas →</button>
+        <div class="msg" id="msg" role="status"></div>
+        <div class="ticks"><span>Completamente gratis</span><span>Sin spam</span><span>Tu correo no se comparte</span></div>
+      </form>
+      <div class="done">
+        <p class="eyebrow">Listo</p>
+        <h3>¡Ya están abiertas!</h3>
+        <p>Arriba tienes los botones para hacer tu copia. En unos minutos te llegan también a tu correo (revisa Promociones o Spam si no lo ves).</p>
+        <a class="btn" href="#biblioteca">Ir a mis plantillas ↑</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="row">
+      <div>@augperz · Finanzas para sueldos reales</div>
+      <div><a href="https://www.instagram.com/augperz/" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+    <p style="margin:14px 0 0">Contenido educativo; no es asesoría financiera personalizada. Usamos tu correo solo para enviarte las plantillas y, si lo aceptas, novedades. Si no quieres recibir más correos, responde cualquiera y te saco de la lista.</p>
+  </footer>
+</main>
+
+<script>
+  // Aplicación web de Apps Script (tools/apps-script/Code.gs, acción "registro").
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycby07kKZy-ZXRZF1Eh3yWPJBfxuimx9wOqFhktG4qWyO6bwPWiyUHsbIID4-UoEuz_XX/exec";
+  const app = document.getElementById("app");
+  const form = document.getElementById("form");
+  const msg = document.getElementById("msg");
+
+  function desbloquear() {
+    app.classList.add("unlocked");
+    document.querySelectorAll("[data-free]").forEach((el) => (el.textContent = "✓ Desbloqueada"));
+  }
+  try { if (localStorage.getItem("sr_desbloqueado") === "1") desbloquear(); } catch (e) {}
+
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    msg.className = "msg"; msg.textContent = "";
+    const email = form.email.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      msg.className = "msg err"; msg.textContent = "Revisa tu correo: parece que le falta algo.";
+      form.email.focus(); return;
+    }
+    const datos = { accion: "registro", email, nombre: form.nombre.value.trim(), avisos: form.avisos.checked, web: form.web.value };
+    // text/plain evita la verificación CORS. Apps Script tarda ~5 s y no deja leer la respuesta,
+    // así que abrimos la biblioteca de una vez y el registro sigue por detrás (keepalive).
+    fetch(ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(datos) }).catch(() => {});
+    try { localStorage.setItem("sr_desbloqueado", "1"); } catch (e) {}
+    desbloquear();
+    document.getElementById("biblioteca").scrollIntoView({ behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
