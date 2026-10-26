@@ -71,6 +71,7 @@
   .price s { color: var(--muted); font-size: 13px; }
   .price b { font-size: 40px; color: var(--gold-2); letter-spacing: -1px; }
   .pack-buy small { color: var(--muted); font-size: 12px; }
+  .usd-ref { display: block; font-style: normal; color: var(--muted); font-size: 13px; }
   @media (max-width: 640px) { .pack { grid-template-columns: 1fr; } }
   .hint { background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--soft); margin-top: 14px; }
   .hint b { color: var(--cream); }
@@ -135,17 +136,17 @@
         <ul class="pack-list"><li>Presupuesto mensual automático</li><li>Salir de Deudas</li><li>Reto Fondo de Emergencia</li><li>Guía “Sueldo bajo control” y 5 videos</li></ul>
       </div>
       <div class="pack-buy">
-        <div class="price"><s>$74.700 + guía y videos</s><b>$79.900</b></div>
-        <a class="btn" href="https://pay.hotmart.com/O108193129M" target="_blank" rel="noopener">Quiero el Sistema completo</a>
+        <div class="price"><s><span data-usd="23">US$ 23</span> + guía y videos</s><b data-usd="24">US$ 24</b><em class="usd-ref" hidden></em></div>
+        <a class="btn" href="https://pay.hotmart.com/O108193129M?off=bt3t7u3f" target="_blank" rel="noopener">Quiero el Sistema completo</a>
         <small>Garantía de 7 días · Pago seguro con Hotmart</small>
       </div>
     </article>
     <div class="grid">
-      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Presupuesto mensual automático</h3><p>Límites por categoría, registro de gastos y alarma si te pasas.</p><a class="btn ghost" href="https://pay.hotmart.com/N108193311E" target="_blank" rel="noopener">Comprar · $19.900</a></article>
-      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Reto Fondo de Emergencia</h3><p>Tu colchón en 12 semanas, con una tarea por semana.</p><a class="btn ghost" href="https://pay.hotmart.com/U108193324M" target="_blank" rel="noopener">Comprar · $24.900</a></article>
-      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Salir de Deudas</h3><p>Bola de nieve o avalancha y el mes en que quedas en cero.</p><a class="btn ghost" href="https://pay.hotmart.com/O108193340M" target="_blank" rel="noopener">Comprar · $29.900</a></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Presupuesto mensual automático</h3><p>Límites por categoría, registro de gastos y alarma si te pasas.</p><a class="btn ghost" href="https://pay.hotmart.com/N108193311E?off=cfnb5ocs" target="_blank" rel="noopener">Comprar&nbsp;·&nbsp;<span data-usd="6">US$ 6</span></a></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Reto Fondo de Emergencia</h3><p>Tu colchón en 12 semanas, con una tarea por semana.</p><a class="btn ghost" href="https://pay.hotmart.com/U108193324M?off=vgf6pvhb" target="_blank" rel="noopener">Comprar&nbsp;·&nbsp;<span data-usd="8">US$ 8</span></a></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Salir de Deudas</h3><p>Bola de nieve o avalancha y el mes en que quedas en cero.</p><a class="btn ghost" href="https://pay.hotmart.com/O108193340M?off=zmxhllfz" target="_blank" rel="noopener">Comprar&nbsp;·&nbsp;<span data-usd="9">US$ 9</span></a></article>
     </div>
-    <div class="hint">Pagas una vez y es tuyo para siempre. Si no te sirve, tienes 7 días para pedir el reembolso en Hotmart.</div>
+    <div class="hint">Pagas una vez y es tuyo para siempre. Si no te sirve, tienes 7 días para pedir el reembolso en Hotmart.<span id="moneda-nota"></span></div>
   </section>
 
   <footer>@augperz · Finanzas para sueldos reales · <a href="https://www.instagram.com/augperz/" target="_blank" rel="noopener">Instagram</a><br>Contenido educativo, no asesoría financiera. Tu correo solo se usa para enviarte las plantillas y novedades; responde “baja” si no quieres más.</footer>
@@ -172,6 +173,39 @@
     desbloquear();
     document.getElementById("biblioteca").scrollIntoView({ behavior: "smooth" });
   });
+
+  // Precios en la moneda del visitante (por IP). Los precios base son en USD; Hotmart cobra en la moneda local.
+  (async () => {
+    try {
+      const forzada = new URLSearchParams(location.search).get("moneda");
+      let cur = forzada ? forzada.toUpperCase() : "";
+      if (!cur) {
+        const MONEDA = { CO: "COP", MX: "MXN", AR: "ARS", CL: "CLP", PE: "PEN", BR: "BRL", UY: "UYU", PY: "PYG", BO: "BOB", GT: "GTQ", HN: "HNL", NI: "NIO", CR: "CRC", DO: "DOP", GB: "GBP", CA: "CAD", CH: "CHF", ES: "EUR", DE: "EUR", FR: "EUR", IT: "EUR", PT: "EUR", NL: "EUR", BE: "EUR", AT: "EUR", IE: "EUR", FI: "EUR", GR: "EUR" };
+        const r = await fetch("https://ipwho.is/?fields=success,country_code");
+        const j = await r.json();
+        cur = (j && j.success && MONEDA[j.country_code]) || "";
+      }
+      if (!cur || cur === "USD") return;
+      const r2 = await fetch("https://open.er-api.com/v6/latest/USD");
+      const j2 = await r2.json();
+      const tasa = j2 && j2.rates && j2.rates[cur];
+      if (!tasa) return;
+      // Hotmart usa su propia tasa (incluye impuestos y comisiones), ~5 % por encima del mercado
+      const FACTOR_HOTMART = 1.055;
+      const fmt = (usd) => {
+        let v = usd * tasa * FACTOR_HOTMART;
+        const grande = v >= 1000;
+        if (grande) v = Math.round(v / 100) * 100;
+        const n = new Intl.NumberFormat(cur === "COP" ? "es-CO" : "es", { maximumFractionDigits: grande ? 0 : 2, minimumFractionDigits: grande ? 0 : 2 }).format(v);
+        return cur === "COP" ? `$ ${n}` : `${n} ${cur}`;
+      };
+      document.querySelectorAll("[data-usd]").forEach((el) => { el.textContent = fmt(Number(el.dataset.usd)); });
+      const ref = document.querySelector(".usd-ref");
+      if (ref) { ref.textContent = "≈ US$ 24"; ref.hidden = false; }
+      const nota = document.getElementById("moneda-nota");
+      if (nota) nota.textContent = ` Precios aproximados en ${cur}; Hotmart te cobra en tu moneda al cambio del día.`;
+    } catch (e) {}
+  })();
 </script>
 </body>
 </html>
