@@ -58,8 +58,20 @@
   .unlocked .item .alt { display: block; }
   .unlocked .item .open { display: inline-flex; }
   .unlocked .item .lock.free { color: var(--green); border-color: rgba(47,191,122,.4); }
-  .item.pro { border-style: dashed; background: transparent; }
-  .soon { margin-top: auto; text-align: center; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; padding: 10px; font-weight: 700; font-size: 14px; }
+  .item.pro { background: var(--card-2); }
+  .item.pro .lock { color: var(--gold); border-color: rgba(201,163,78,.45); }
+  .pack { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: center; background: linear-gradient(135deg, #1E2A23, #18221C); border: 2px solid var(--gold); border-radius: 22px; padding: 26px 24px; margin-bottom: 14px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+  .pack h3 { font-size: clamp(28px, 5vw, 38px); line-height: 1.05; margin: 6px 0 10px; font-weight: 800; letter-spacing: -.5px; }
+  .pack p { color: var(--soft); font-size: 15px; margin: 0 0 10px; }
+  .pack-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--cream); font-size: 14px; }
+  .pack-list li::before { content: "✓ "; color: var(--gold); font-weight: 800; }
+  .pack-buy { text-align: center; display: grid; gap: 10px; }
+  .pack-buy .btn { width: 100%; }
+  .price { display: grid; gap: 2px; }
+  .price s { color: var(--muted); font-size: 13px; }
+  .price b { font-size: 40px; color: var(--gold-2); letter-spacing: -1px; }
+  .pack-buy small { color: var(--muted); font-size: 12px; }
+  @media (max-width: 640px) { .pack { grid-template-columns: 1fr; } }
   .hint { background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--soft); margin-top: 14px; }
   .hint b { color: var(--cream); }
   footer { border-top: 1px solid var(--line); margin-top: 20px; padding: 20px 0 36px; color: var(--muted); font-size: 13px; text-align: center; }
@@ -113,13 +125,27 @@
     <div class="hint"><b>¿No te deja copiar o editar en el celular?</b> Abre esta página en Chrome o Safari (no dentro de Instagram) con tu cuenta de Google.</div>
   </section>
 
-  <section>
-    <p class="eyebrow">Muy pronto · Herramientas Pro</p>
+  <section id="pro">
+    <p class="eyebrow">Herramientas Pro · Pago único</p>
+    <article class="pack">
+      <div class="pack-text">
+        <span class="tag">Sistema completo</span>
+        <h3>Sueldo <span class="serif">bajo control</span></h3>
+        <p>Las 3 plantillas Pro + guía PDF de 22 páginas + 5 videos paso a paso. Acceso de por vida.</p>
+        <ul class="pack-list"><li>Presupuesto mensual automático</li><li>Salir de Deudas</li><li>Reto Fondo de Emergencia</li><li>Guía “Sueldo bajo control” y 5 videos</li></ul>
+      </div>
+      <div class="pack-buy">
+        <div class="price"><s>$74.700 + guía y videos</s><b>$79.900</b></div>
+        <a class="btn" href="https://pay.hotmart.com/O108193129M" target="_blank" rel="noopener">Quiero el Sistema completo</a>
+        <small>Garantía de 7 días · Pago seguro con Hotmart</small>
+      </div>
+    </article>
     <div class="grid">
-      <article class="item pro"><span class="lock">🔒 Pro</span><span class="tag">Plantilla</span><h3>Presupuesto mensual automático</h3><p>Límites por categoría y alarma si te pasas.</p><div class="soon">Muy pronto</div></article>
-      <article class="item pro"><span class="lock">🔒 Pro</span><span class="tag">Plantilla</span><h3>Salir de Deudas</h3><p>Tus deudas, tu método y el mes en que quedas en cero.</p><div class="soon">Muy pronto</div></article>
-      <article class="item pro"><span class="lock">🔒 Pro</span><span class="tag">Plantilla</span><h3>Reto Fondo de Emergencia</h3><p>Tu colchón en 12 semanas, con una tarea por semana.</p><div class="soon">Muy pronto</div></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Presupuesto mensual automático</h3><p>Límites por categoría, registro de gastos y alarma si te pasas.</p><a class="btn ghost" href="https://pay.hotmart.com/N108193311E" target="_blank" rel="noopener">Comprar · $19.900</a></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Reto Fondo de Emergencia</h3><p>Tu colchón en 12 semanas, con una tarea por semana.</p><a class="btn ghost" href="https://pay.hotmart.com/U108193324M" target="_blank" rel="noopener">Comprar · $24.900</a></article>
+      <article class="item pro"><span class="lock">Pro</span><span class="tag">Plantilla</span><h3>Salir de Deudas</h3><p>Bola de nieve o avalancha y el mes en que quedas en cero.</p><a class="btn ghost" href="https://pay.hotmart.com/O108193340M" target="_blank" rel="noopener">Comprar · $29.900</a></article>
     </div>
+    <div class="hint">Pagas una vez y es tuyo para siempre. Si no te sirve, tienes 7 días para pedir el reembolso en Hotmart.</div>
   </section>
 
   <footer>@augperz · Finanzas para sueldos reales · <a href="https://www.instagram.com/augperz/" target="_blank" rel="noopener">Instagram</a><br>Contenido educativo, no asesoría financiera. Tu correo solo se usa para enviarte las plantillas y novedades; responde “baja” si no quieres más.</footer>
